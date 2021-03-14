@@ -76,6 +76,9 @@ def lex(filecontent):
         elif tok=="if" or tok=="IF":
             token.append("IF")
             tok=""
+        elif tok=="else" or tok=="ELSE":
+            token.append("ELSE")
+            tok=""
         elif tok=="then" or tok=="THEN":
             if expr != "" and isexpr ==0:
                 token.append("NUM:" + expr)
@@ -100,7 +103,7 @@ def lex(filecontent):
                 
                 state =1
             elif state ==1:
-                token.append("STRING:"+ string + "\"")
+                token.append("STRING:"+ string + " \"")
                 string=""
                 state =0
                 tok =""
@@ -110,13 +113,13 @@ def lex(filecontent):
     
     #print(token)
     return token
+    
     #return ''
 
 
 def evalExpr(expr):
     
     return eval(expr)
-    
     
         
 
@@ -148,7 +151,8 @@ def getVar(varname):
 def getInt(string,varname):
     i=input(string[1:-1]+ " ")
     symbols[varname] = "STRING:\"" +i +"\""
-    
+
+
     
 def pars(toks):
     i= 0
@@ -165,6 +169,13 @@ def pars(toks):
                 doPrint(getVar(toks[i+1]))
 
             i+=2
+            
+        elif toks[i]+" "+toks[i+1] =="ELSE THEN":
+            if toks[i] == "ELSE":
+            
+                pass
+            i+=2
+            
         elif toks[i][0:3] + " " + toks[i+1]+" "+ toks[i+2][0:6] =="VAR EQUALS STRING" or toks[i][0:3] + " " + toks[i+1]+" "+ toks[i+2][0:3] =="VAR EQUALS NUM" or toks[i][0:3] + " " + toks[i+1]+" "+ toks[i+2][0:4] =="VAR EQUALS EXPR" or toks[i][0:3] + " " + toks[i+1]+" "+ toks[i+2][0:3] =="VAR EQUALS VAR":
             
             if toks[i+2][0:6] == "STRING":
@@ -180,13 +191,22 @@ def pars(toks):
         elif toks[i]+" "+toks[i+1][0:6]+ " "+toks[i+2][0:3] =="INPUT STRING VAR":
             getInt(toks[i+1][7:],toks[i+2][4:])
             i+=3
-        elif toks[i]+" "+toks[i+1][0:3]+ " "+toks[i+2]+ " "+toks[i+3][0:3]+ " "+toks[i+4] =="IF NUM EQEQ NUM THEN":
+        elif toks[i]+" "+toks[i+1][0:3]+ " "+toks[i+2]+ " "+toks[i+3][0:3]+ " "+toks[i+4] =="IF NUM EQEQ NUM THEN" or toks[i]+" "+toks[i+1][0:3]+ " "+toks[i+2]+ " "+toks[i+3][0:3]+ " "+toks[i+4] =="IF VAR EQEQ VAR THEN":
             if toks[i+1][4:] ==toks[i+3][4:]:
-                print("TRUE")
+                
+                
+                pass
+                
+                
             else:
-            
-                print("False")
+                
+                
+                
+                print("false")
+                exit()
+                
             i+=5
+            
         
     #print(symbols)        
 def run():
