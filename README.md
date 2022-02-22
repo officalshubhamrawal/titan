@@ -1,4 +1,4 @@
-# Titan (MY OWN PROGRAMMING INTERPRETER/LANGUAGE) (.ti)
+# Titan (A NON-Tech USER INTERPRETER/LANGUAGE) (.ti)
 So i created titan with the aim to help non technical users code their day to day task and automate their day to day tasks.
 Titan(.ti) is developed on python and based on BASIC.
 Everything is hardcoded and no dynamic processing take place.
